@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rules>
+    <rule id="sleep">
+        <condition>
+            <item opcode="equal" var1="$input:response.action" var2="SetSleep"/>
+            <item opcode="equal" var1="$input:response.target" var2="Sleep"/>
+        </condition>
+        <output>
+            <item>
+                <target value="Core.PowerManager"/>
+                <action value="sleep"/>
+            </item>
+            <item>
+                <target value="Pudding" />
+                <action value="sleep" />
+            </item>
+        </output>
+    </rule>
+
+    <rule id="forward.music">
+        <condition>
+            <or>
+                <item opcode="equal" var1="$input:response.target" var2="Media"/>
+                <item opcode="equal" var1="$input:response.target" var2="Music"/>
+                <item opcode="equal" var1="$input:response.target" var2="qqmusic"/>
+            </or>
+        </condition>
+        <output>
+            <item>
+                <target value="SCENE_DEMO"/>
+                <action value="$input:response.action"/>
+                <params value="$input:response.params"/>
+                <suggestion value="$input:response.suggestion"/>
+            </item>
+        </output>
+    </rule>
+
+    <rule id="forward.all">
+        <condition>
+            <item opcode="not" var1="$input:response.target" var2="$null"/>
+        </condition>
+        <output>
+            <item>
+                <target value="Pudding"/>
+                <action value="MediaBackground"/>
+                <params>
+                    <MediaBackground value="$input:MediaBackground"/>
+                </params>
+            </item>
+            <item>
+                <target value="Pudding"/>
+                <action value="$input:response.action"/>
+                <params value="$input:response.params"/>
+                <suggestion value="$input:response.suggestion"/>
+            </item>
+        </output>
+    </rule>
+</rules>
+

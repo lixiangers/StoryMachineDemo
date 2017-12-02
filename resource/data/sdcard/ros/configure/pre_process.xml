@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rules>
+    <rule id="new_voice_wakeup">
+        <condition>
+            <item opcode="equal" var1="$input:asr.command" var2="wakeup" />
+        </condition>
+        <output>
+            <item>
+                <target value="$input:scene.top" />
+                <action value="Pause" />
+            </item>
+            <item>
+                <target value="Core.PowerManager" />
+                <action value="quietActive" />
+            </item>
+            <item>
+                <target value="Pudding" />
+                <action value="wakeup" />
+            </item>
+        </output>
+    </rule>
+</rules>

@@ -1,0 +1,36 @@
+android {
+    apply from: "${rootProject.ext.project_common}"
+
+    signingConfigs {
+        myConfig {
+            storeFile file("${keystore_dir}/keystore.jks")
+            storePassword "android"
+            keyAlias "rtoy"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled true
+            signingConfig signingConfigs.myConfig
+        }
+
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            signingConfig signingConfigs.myConfig
+        }
+    }
+}
+
+task output(type: Copy, dependsOn: [assemble]) {
+    from('build/outputs/apk') {
+        include('*.apk')
+        exclude('*unaligned*')
+    }
+    into("${rootProject.ext.output_dir}/apk")
+}
+

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <item key="device.production" type="string" value="storymachine"/>
+</config>

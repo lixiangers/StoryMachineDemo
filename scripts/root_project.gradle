@@ -1,0 +1,23 @@
+ext {
+    // scripts
+    project_common = rootProject.rootDir.absolutePath + '/scripts/project_common.gradle';
+    app_common = rootProject.rootDir.absolutePath + '/scripts/app_common.gradle';
+
+    //dirs
+    output_dir = rootProject.rootDir.absolutePath + '/output'
+    keystore_dir = rootProject.rootDir.absolutePath + '/keystores'
+    resource_dir = rootProject.rootDir.absolutePath + '/resource'
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+    delete output_dir
+}
+
+task output(type: Copy) {
+    from("${rootProject.ext.resource_dir}")
+    into("${rootProject.ext.output_dir}")
+    exclude 'libs/'
+}
+
+
