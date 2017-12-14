@@ -36,7 +36,7 @@ def installApk(type):
 def installPlatformApk():
     path = "./"
     for file in os.listdir(path):
-        if file.find(".apk") > 0 and file.find("PlatformService") >= 0:
+        if file.find(".apk") > 0 :
             exeCmd("adb install -r -d " + path + file)
 
 if len(sys.argv) <= 2:
